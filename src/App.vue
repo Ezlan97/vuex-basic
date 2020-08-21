@@ -1,17 +1,32 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <h1>Todos</h1>
+    <h3>Completed : {{ countCompletedTodos }}</h3>
+    <h3>Pending : {{ countNotCompletedTodos }}</h3>
+    <todos-list />
+    <todo-form />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import TodosList from './components/todos-list'
+import TodoForm from './components/todo-form'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    TodosList,
+    TodoForm
+  },
+
+  computed: {
+    countCompletedTodos() {
+      return this.$store.getters.completedStatus
+    },
+
+    countNotCompletedTodos() {
+      return this.$store.getters.notCompletedStatus;
+    }
   }
 }
 </script>
