@@ -2,24 +2,24 @@
   <div>
     <div style="width: 250px; margin:5px auto;">
       <div style="display:flex; justify-content:space-between">
-        <span :class="{completed: todo.completed}" @click="updateStatus()">{{ todo.title }}</span>
-        <button class="btn" @click="deleteTodo()">Delete</button>
+        <span :class="{completed: todo.completed}" @click="updateStatus(todo)">{{ todo.title }}</span>
+        <button class="btn" @click="deleteTodo(todo)">Delete</button>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import {mapActions} from 'vuex'
+
 export default {
   props: ["todo"],
 
   methods: {
-    deleteTodo() {
-      this.$store.dispatch("deleteTodo", this.todo);
-    },
-    updateStatus() {
-      this.$store.dispatch("updateStatus", this.todo);
-    }
+    ...mapActions({
+      deleteTodo: 'deleteTodo',
+      updateStatus: 'updateStatus'
+    })
   },
 };
 </script>

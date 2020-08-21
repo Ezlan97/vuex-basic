@@ -1,14 +1,15 @@
 <template>
   <div id="app">
     <h1>Todos</h1>
-    <h3>Completed : {{ countCompletedTodos }}</h3>
-    <h3>Pending : {{ countNotCompletedTodos }}</h3>
+    <h3>Completed : {{ completedStatus }}</h3>
+    <h3>Pending : {{ pendingStatus }}</h3>
     <todos-list />
     <todo-form />
   </div>
 </template>
 
 <script>
+import {mapGetters} from 'vuex'
 import TodosList from './components/todos-list'
 import TodoForm from './components/todo-form'
 
@@ -20,13 +21,10 @@ export default {
   },
 
   computed: {
-    countCompletedTodos() {
-      return this.$store.getters.completedStatus
-    },
-
-    countNotCompletedTodos() {
-      return this.$store.getters.notCompletedStatus;
-    }
+    ...mapGetters({
+      completedStatus: 'completedStatus',
+      pendingStatus: 'pendingStatus'
+    })
   }
 }
 </script>
